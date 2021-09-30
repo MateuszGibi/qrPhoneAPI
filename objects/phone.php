@@ -52,6 +52,26 @@
             else{
                 return false;
             }
+
+        }
+        
+        //Read one phone info
+        public function read_one(){
+
+            $query = "SELECT producer, model, imei FROM " . $this -> table_name . " WHERE id = ? LIMIT 0,1";
+
+            $stm = $this -> conn -> prepare($query);
+
+            $stm -> bindParam(1, $this -> id);
+
+            $stm -> execute();
+
+            $row = $stm -> fetch(PDO::FETCH_ASSOC);
+
+            $this -> producer = $row['producer'];
+            $this -> model = $row['model'];
+            $this -> imei = $row['imei'];
+
         }
 
     }
